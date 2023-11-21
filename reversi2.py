@@ -50,7 +50,7 @@ def nbAngle(b, player=None):
         player = b._nextPlayer
 
     score = 0 
-
+    # A MODIFIER, RAJOUTER CASE COTE
     val_case = {(0,0): 100, (b._boardsize-1,0): 100, (0,b._boardsize-1): 100, (b._boardsize-1,b._boardsize-1): 100}
 
     for position, value in val_case.items():
