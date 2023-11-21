@@ -82,6 +82,8 @@ def nbTourAJouer(b, player=None):
             scoreTour -= value
     return scoreTour
 
+# Implémenter quand en fonction du nombre de piece qu'on mange ?
+
 def heuristique2(b, player=None):
     if player is None:
         player = b._nextPlayer
