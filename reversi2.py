@@ -5,21 +5,9 @@ def randomMove(b):
     '''Renvoie un mouvement au hasard sur la liste des mouvements possibles.'''
     return choice([m for m in b.legal_moves()])
 
-# def deroulementRandom(b):
-#     '''Déroulement d'une partie au hasard des coups possibles. Cela illustre cependant comment on peut jouer avec la librairie
-#     très simplement.'''
-#     print("----------")
-#     print(b)
-#     if b.is_game_over():
-#         return
-#     b.push(randomMove(b))
-#     deroulementRandom(b)
-#     b.pop()
-
-
 def minValue(b, alpha, beta, profondeur=3):
     if profondeur == 0 or b.is_game_over():
-        return b.heuristique()
+        return heuristique2()
 
     for m in b.legal_moves():
         b.push(m)
@@ -33,7 +21,7 @@ def minValue(b, alpha, beta, profondeur=3):
 
 def maxValue(b, alpha, beta, profondeur=3):
     if profondeur == 0 or b.is_game_over():
-        return b.heuristique()
+        return heuristique2()
 
     for m in b.legal_moves():
         b.push(m)
@@ -56,6 +44,51 @@ def IAAlphaBeta(b, alpha, beta, profondeur=3):
             meilleur_coup = m
     return meilleur_coup
 
+def nbAngle(player=None):
+    # Position stratégiques dans les angles
+    if player is None : 
+        player = board._nextPlayer
+
+    score = 0 
+
+    val_case = {(0,0): 10, (board._boardsize-1,0): 10, (0,board._boardsize-1): 10, (board._boardsize-1,board._boardsize-1): 10}
+
+    for position, value in val_case.items():
+        if board._board[position[0]][position[1]] == player:
+            score += value
+        else:
+            score -= value  # Pénalise les cases dans les angles occupées par l'adversaire
+    return score
+
+def nbTourAJouer(player=None):
+    if player is None:
+        player = board._nextPlayer
+
+    # Obtenir les positions possibles pour le joueur actuel
+    possible_moves = board.legal_moves()
+
+    # Initialiser le score
+    scoreTour = 0
+
+    # Définir la valeur en fonction du joueur
+    value = 1 if player == board._nextPlayer else -1
+
+    # Calculer le score en fonction des positions possibles
+    for move in possible_moves:
+        x, y = move[1], move[2]
+        if board._board[x][y] == player:
+            scoreTour += value
+        else:
+            scoreTour -= value
+    return scoreTour
+
+def heuristique2(player=None):
+    if player is None:
+        player = board._nextPlayer
+    h = board.heuristique()
+    a = nbAngle()
+    t = nbTourAJouer()
+    return h+a+t
 
 board = Reversi.Board()
 
@@ -74,4 +107,3 @@ while not board.is_game_over():
     board.push(coup)
     print('-------IAAlphaBeta joue : ', coup)
     print(board)
-
