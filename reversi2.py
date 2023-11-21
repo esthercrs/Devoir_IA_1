@@ -7,7 +7,7 @@ def randomMove(b):
 
 def minValue(b, alpha, beta, profondeur=3):
     if profondeur == 0 or b.is_game_over():
-        return heuristique2()
+        return heuristique2(b)
 
     for m in b.legal_moves():
         b.push(m)
@@ -21,7 +21,7 @@ def minValue(b, alpha, beta, profondeur=3):
 
 def maxValue(b, alpha, beta, profondeur=3):
     if profondeur == 0 or b.is_game_over():
-        return heuristique2()
+        return heuristique2(b)
 
     for m in b.legal_moves():
         b.push(m)
@@ -44,50 +44,50 @@ def IAAlphaBeta(b, alpha, beta, profondeur=3):
             meilleur_coup = m
     return meilleur_coup
 
-def nbAngle(player=None):
+def nbAngle(b, player=None):
     # Position stratégiques dans les angles
     if player is None : 
-        player = board._nextPlayer
+        player = b._nextPlayer
 
     score = 0 
 
-    val_case = {(0,0): 10, (board._boardsize-1,0): 10, (0,board._boardsize-1): 10, (board._boardsize-1,board._boardsize-1): 10}
+    val_case = {(0,0): 100, (b._boardsize-1,0): 100, (0,b._boardsize-1): 100, (b._boardsize-1,b._boardsize-1): 100}
 
     for position, value in val_case.items():
-        if board._board[position[0]][position[1]] == player:
+        if b._board[position[0]][position[1]] == player:
             score += value
         else:
             score -= value  # Pénalise les cases dans les angles occupées par l'adversaire
     return score
 
-def nbTourAJouer(player=None):
+def nbTourAJouer(b, player=None):
     if player is None:
-        player = board._nextPlayer
+        player = b._nextPlayer
 
     # Obtenir les positions possibles pour le joueur actuel
-    possible_moves = board.legal_moves()
+    possible_moves = b.legal_moves()
 
     # Initialiser le score
     scoreTour = 0
 
     # Définir la valeur en fonction du joueur
-    value = 1 if player == board._nextPlayer else -1
+    value = 1 if player == b._nextPlayer else -1
 
     # Calculer le score en fonction des positions possibles
     for move in possible_moves:
         x, y = move[1], move[2]
-        if board._board[x][y] == player:
+        if b._board[x][y] == player:
             scoreTour += value
         else:
             scoreTour -= value
     return scoreTour
 
-def heuristique2(player=None):
+def heuristique2(b, player=None):
     if player is None:
-        player = board._nextPlayer
-    h = board.heuristique()
-    a = nbAngle()
-    t = nbTourAJouer()
+        player = b._nextPlayer
+    h = b.heuristique()
+    a = nbAngle(b)
+    t = nbTourAJouer(b)
     return h+a+t
 
 board = Reversi.Board()
