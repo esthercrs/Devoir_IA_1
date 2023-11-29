@@ -74,9 +74,9 @@ def menu() :
     print("    M E N U     P R I N C I P A L    ")
     print("=====================================")
     print("1 - Règles du jeu")
-    print("2 - Commencer une partie contre l'ia")
-    print("3 - Observer une partie IA vs Random")
-    print("4 - Observer une partie IA vs IA")
+    print("2 - Observer une partie IA vs Random")
+    print("3 - Observer une partie IA vs IA")
+    print("4 - Regarder les stats d'IA vs Random")
     print("0 - Quitter")
     print("=====================================")
     return input(">>>>> Que voulez-vous faire ? ")
@@ -130,32 +130,113 @@ def rgame_rules():
 def winner(board):
     nb_W, nb_B = board.get_nb_pieces()
     if nb_B>nb_W:
-        print ("Joueur Random gagne")
+        print ("Black gagne")
+        return 'Black'
+    if nb_W>nb_B: 
+        print("White gagne")
+        return 'White'
     else : 
-        print("L'IA gagne")
+        print("Ex aequo")
+        return 'Execo'
+        
 
-def partie(board):
+def partie_IA_Random(board):
     alpha= -2000
     beta= 2000
-    profondeur=3
+    profondeur=5
 
-    print(board)
+    # print(board)
 
     while not board.is_game_over():
         coup = randomMove(board)
         board.push(coup)
-        print('-------Random joue : ', coup)
-        print(board)
+        # print('-------Random joue : ', coup)
+        # print(board)
 
         if board.is_game_over():
             break
 
         coup = IAAlphaBeta(board, alpha, beta, profondeur=profondeur)
         board.push(coup)
-        print('-------IAAlphaBeta joue : ', coup)
+        # print('-------IAAlphaBeta joue : ', coup)
+        # print(board)
+    return (winner(board))
+
+def partie_IA_IA(board):
+    alpha= -2000
+    beta= 2000
+    profondeur=5
+    print(board)
+    while not board.is_game_over():
+        coup = IAAlphaBeta(board, alpha, beta, profondeur=profondeur)
+        board.push(coup)
+        print('-------IAAALphaBeta_1 joue : ', coup)
         print(board)
-    
-    winner(board)
+        if board.is_game_over():
+            break
+        coup = IAAlphaBeta(board, alpha, beta, profondeur=profondeur)
+        board.push(coup)
+        print('-------IAAlphaBeta_2 joue : ', coup)
+        print(board)
+    return (winner(board))
+
+'''def partie_IA_Humain(board):
+    alpha= -2000
+    beta= 2000
+    profondeur=3
+    print(board)
+    while not board.is_game_over():
+
+        print("Dans quelle case voulez vous jouer ?")
+        global ligne
+        ligne=input("Ligne : ")
+        global colonne
+        colonne=input("Colonne : ")
+        while ligne.isdigit()==False or int(ligne) not in range(0,board._boardsize-1):
+            print("Dans quelle case voulez vous jouer ?")
+            ligne=input("Ligne : ")
+        while colonne.isdigit()==False or int(colonne) not in range(1,9):
+            print("Dans quelle case voulez vous jouer ?")
+            colonne=input("Colonne : ")
+        if board.is_valid_move(board._nextPlayer, ligne, colonne):
+            coup = [board._nextPlayer,ligne,colonne]
+        board.push(coup)
+        print('-------l Humain joue : ', coup)
+        print(board)
+        if board.is_game_over():
+            break
+        coup = IAAlphaBeta(board, alpha, beta, profondeur=profondeur)
+        board.push(coup)
+        print('-------IAAlphaBeta_2 joue : ', coup)
+        print(board)
+    winner(board)'''
+
+def stat(nbr_partie):
+    alpha= -2000
+    beta= 2000
+    profondeur=5
+
+    score_B = 0
+    score_W = 0
+    exec = 0
+
+    n=0
+
+    while n < nbr_partie : 
+        board = Reversi.Board()
+        winner = partie_IA_Random(board)
+
+        n=n+1
+        if winner == 'Black' :
+            score_B += 1
+        if winner == 'White' : 
+            score_W += 1
+        if winner == 'Exec': 
+            exec += 1
+        
+    print("Black gagne : ", score_B, " fois")
+    print("White gagne : ", score_W, " fois")
+    print("Il y a eu : ", exec, "egalite")
 
 def main():
 
@@ -177,14 +258,21 @@ def main():
             rgame_rules()
         if (choice=="2"):
             board = Reversi.Board()
-            print("===== Début de la nouvelle partie...")
-            partie(board)
+            print("===== Début de la partie Random vx IA...")
+            partie_IA_Random(board)
+            print(board)
+        if (choice=="3"):
+            board = Reversi.Board()
+            print("===== Début de la partie IA vs IA...")
+            partie_IA_IA(board)
+        if (choice=="4"):
+            val = int(input("Vous voulez des stats sur quel nombre de partie ? "))
+            stat(val)
+        #if (choice=="4"): # A rajouter dans le menu
+            #board = Reversi.Board()
+            #print("===== Début de la partie...")
+            #partie_IA_Humain(board)
         choice=menu()
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
