@@ -162,6 +162,7 @@ def partie_IA_Random(board):
         # print(board)
     return (winner(board))
 
+
 def partie_IA_IA(board):
     alpha= -2000
     beta= 2000
@@ -179,6 +180,30 @@ def partie_IA_IA(board):
         print('-------IAAlphaBeta_2 joue : ', coup)
         print(board)
     return (winner(board))
+
+
+def partie_IA_Random_stat(board,prof):
+    alpha= -2000
+    beta= 2000
+    profondeur= prof
+
+    # print(board)
+
+    while not board.is_game_over():
+        coup = randomMove(board)
+        board.push(coup)
+        # print('-------Random joue : ', coup)
+        # print(board)
+
+        if board.is_game_over():
+            break
+
+        coup = IAAlphaBeta(board, alpha, beta, profondeur=profondeur)
+        board.push(coup)
+        # print('-------IAAlphaBeta joue : ', coup)
+        # print(board)
+    return (winner(board))
+
 
 '''def partie_IA_Humain(board):
     alpha= -2000
@@ -211,11 +236,8 @@ def partie_IA_IA(board):
         print(board)
     winner(board)'''
 
-def stat(nbr_partie):
-    alpha= -2000
-    beta= 2000
-    profondeur=5
-
+def stat(nbr_partie,prof):
+    prof = prof
     score_B = 0
     score_W = 0
     exec = 0
@@ -224,7 +246,7 @@ def stat(nbr_partie):
 
     while n < nbr_partie : 
         board = Reversi.Board()
-        winner = partie_IA_Random(board)
+        winner = partie_IA_Random_stat(board,prof)
 
         n=n+1
         if winner == 'Black' :
@@ -267,7 +289,8 @@ def main():
             partie_IA_IA(board)
         if (choice=="4"):
             val = int(input("Vous voulez des stats sur quel nombre de partie ? "))
-            stat(val)
+            prof = int(input("Quelle profondeur voulez vous tester? "))
+            stat(val,prof)
         #if (choice=="4"): # A rajouter dans le menu
             #board = Reversi.Board()
             #print("===== Début de la partie...")
