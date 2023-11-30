@@ -4,11 +4,11 @@ fait par : Elsa Coutaud, Esther Cros et Mallory Le Corre
 Installation à faire avant de lancer le code : 
 pip install : random, time, os
 
-IA employé : 
+IA employée : 
 Notre groupe à choisi de travailler avec MinMax. Ce type d'algorithme de recherche contradictoire représente les conditions gagnantes par des valeurs négatives pour un camp et par des valeurs positives pour l'autre. Les actions ultérieures seront déterminées par ces conditions, le côté minimisant essayant d'obtenir le score le plus bas, et le côté maximisant essayant d'obtenir le score le plus élevé.
 
 Technique d'optimisation : 
-Nous avons choisi d'utiliser Alpha Beta afin d'optimiser MinMax. Ayant un plateau très grand et donc de nombreuses possibilités de jeu il nous as parut judicieux de sauter certains des calculs récursifs qui sont résolument défavorables. 
+Nous avons choisi d'utiliser Alpha Beta afin d'optimiser MinMax. Ayant un plateau très grand et donc de nombreuses possibilités de jeu il nous a paru judicieux de sauter certains des calculs récursifs qui sont résolument défavorables. 
 En effet, après avoir établi la valeur d'une action, s'il existe une première preuve que l'action suivante peut amener l'adversaire à obtenir un meilleur score que l'action déjà établie nous n'avons pas jugé nécéssaire d'étudier plus cette action.
 
 Heuristique : 
