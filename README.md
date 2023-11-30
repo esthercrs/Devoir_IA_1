@@ -1,7 +1,7 @@
 README Devoir d'intélligence articifielle
 fait par : Elsa Coutaud, Esther Cros et Mallory Le Corre
 
-Installation : 
+Installation à faire avant de lancer le code : 
 pip install : random, time, os
 
 IA employé : 
