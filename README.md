@@ -20,6 +20,6 @@ Le projet correspondant premièrement à un jeu, nous avons donc souhaiter propo
 Il est possible tout d'abord de consulter les régles de jeu. Puis d'observer une partie entre deux IA ou entre une IA et des coups random.
 La dernière option propose des statistiques sur la partie opposant l'IA à des coups random. Pour cette partie nous avons simplement fait une fonction qui lance un nombre de partie à préciser et d'en donner le nombre de victoire et de défaite. 
 
-Après avoir essayé le menu statistiques avec 100 parties et une profondeur de 6, nous obtenons ... victoires de l'IA. 
+Après avoir essayé le menu statistiques avec 100 parties et une profondeur de 6, nous obtenons 88 victoires de l'IA et 2 égalités. 
 
 A savoir : Le joueur 'White' correspond à l'IA pour les parties opposant IA et random. 
