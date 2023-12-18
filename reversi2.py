@@ -227,12 +227,12 @@ def winner(b):
     return winner
         
 
-def partie_IA_Random(b, profondeur = 5, affichage = True):
+def partie_IA_Random(b, profondeur = 6, affichage = True):
     """Création d'une partie entre notre IA et un joueur random.
 
     Args:
         b (Reversi.Board): Implémentation du jeu Reversi.
-        profondeur (int): profondeur de recherche de l'algorithme. Defaults to 5.
+        profondeur (int): profondeur de recherche de l'algorithme. Defaults to 6.
         affichage (bool): Affichage du déroulement de la partie. Defaults to True.
 
     Returns:
@@ -261,12 +261,12 @@ def partie_IA_Random(b, profondeur = 5, affichage = True):
     return win
 
 
-def partie_IA_IA(b, profondeur = 5, affichage = True):
+def partie_IA_IA(b, profondeur = 6, affichage = True):
     """Création d'une partie entre deux joueurs IA.
 
     Args:
         b (Reversi.Board): Implémentation du jeu Reversi.
-        profondeur (int): profondeur de recherche de l'algorithme. Defaults to 5.
+        profondeur (int): profondeur de recherche de l'algorithme. Defaults to 6.
         affichage (bool): Affichage du déroulement de la partie. Defaults to True.
 
     Returns:
