@@ -2,7 +2,7 @@ README Devoir d'intélligence articifielle
 fait par : Elsa Coutaud, Esther Cros et Mallory Le Corre
 
 Installation à faire avant de lancer le code : 
-pip install : random, time, os
+pip install : random, time
 
 IA employée : 
 Notre groupe à choisi de travailler avec MinMax. Ce type d'algorithme de recherche contradictoire représente les conditions gagnantes par des valeurs négatives pour un camp et par des valeurs positives pour l'autre. Les actions ultérieures seront déterminées par ces conditions, le côté minimisant essayant d'obtenir le score le plus bas, et le côté maximisant essayant d'obtenir le score le plus élevé.
